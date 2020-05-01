@@ -22,7 +22,7 @@ handle202: Will return an Exception object if set to true
 $clientObj = (object) [
    'client_id' => 'your_client_id',
    'client_secret' => 'your_client_secret',
-   'fingerprint' => '|your_finger_print',
+   'fingerprint' => 'your_finger_print',
    'ip_address' => 'your_ip_address',
    'devmode' => True,
    'logging' => True,
