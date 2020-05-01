@@ -6,7 +6,6 @@ Add a require statement at the top of your php file. Vendor folder will contain 
 require_once 'vendor/synapsefi/synapse_rest/synapse_rest/client.php';
 ```
 
-
 ## Initialization
 
 ```php
@@ -29,7 +28,7 @@ $clientObj = (object) [
    'logging' => True,
    'handle202' => True
 ];
-$client = Client($clientObj);
+$client = new Client($clientObj);
 ```
 
 #### Get All Users on Platform
@@ -45,6 +44,7 @@ $allusers = $client->get_all_users($query, $page, $per_page, $show_refresh);
 ```
 
 #### Create a User
+
 ```php
 Body is required and idempotency key is optional. Idempotency key is set to null by default.
 ---------------------------------------------------------------------------------------------
@@ -59,14 +59,16 @@ $newuser = $client->create_user($body, $idempotency_key);
 ```
 
 #### Get a Single User on Platform
+
 ```php
 Userid is required and full_dehydrate is optional. Full_dehydrate is set to null by default.
 ---------------------------------------------------------------------------------------------
-$full_dehydrate = 'yes';  
+$full_dehydrate = 'yes';
 $user = $client->get_user('your_user_id', $full_dehydrate);
 ```
 
 #### Add New Documents
+
 ```php
 Body is required.
 ---------------
@@ -117,6 +119,7 @@ $user = $client->update_info($body);
 ```
 
 #### Update Existing Documents
+
 ```php
 Body is required.
 ---------------
@@ -132,8 +135,8 @@ $body = array (
 $user = $client->update_info($body);
 ```
 
-
 #### Delete Existing Documents
+
 ```php
 Body is required.
 ---------------
@@ -150,6 +153,7 @@ $user = $client->update_info($body);
 ```
 
 #### Update User
+
 ```php
 Body is required.
 ---------------
@@ -163,6 +167,7 @@ $user = $client->update_info($body);
 ```
 
 #### Generate UBO
+
 ```php
 Entity is required and idempotency key is optional. Idempotency Key is null by default.
 ----------------------------------------------------------------------------------------
@@ -176,6 +181,7 @@ $user = $client->create_ubo($entity, $idempotency_key);
 ```
 
 #### Oauth User
+
 ```php
 Body is required
 -----------------
@@ -187,6 +193,7 @@ $oauthpayload = $user->ouath($body);
 ```
 
 #### Select Two Factor Authentication device
+
 ```php
 Body is required
 -----------------
@@ -199,6 +206,7 @@ $oauthpayload = $user->select_2fa_device($body);
 ```
 
 #### Confirm Pin from Two Factor Authentication device
+
 ```php
 Body is required
 -----------------
@@ -210,8 +218,8 @@ $body = (object) [
 $oauthpayload = $user->confirm_2fa_pin($body);
 ```
 
-
 #### Retrieve All Nodes
+
 ```php
 All parameters are optional. Page, per page and type are set to null by default.
 --------------------------------------------------------------------------------
@@ -222,6 +230,7 @@ $allNodes = get_all_nodes($page , $per_page , $type);
 ```
 
 #### Create Deposit Node
+
 ```php
 Body is required and idempotency key is optional. Idempotency key is set to null by default.
 --------------------------------------------------------------------------------------------
@@ -238,6 +247,7 @@ $depositnode = create_node($body , $idempotency_key);
 ```
 
 #### Create Card Node
+
 ```php
 Body is required and idempotency key is optional. Idempotency key is set to null by default.
 --------------------------------------------------------------------------------------------
@@ -255,8 +265,8 @@ $user = $client->get_user('your_user_id');
 $depositnode = $user->create_node($body , $idempotency_key);
 ```
 
-
 #### Ship Debit Card
+
 ```php
 Body is required and idempotency key is optional. Idempotency key is set to null by default.
 --------------------------------------------------------------------------------------------
@@ -270,6 +280,7 @@ $shipdebit = $user->ship_debit($nodeid , $body);
 ```
 
 #### Reset Debit Card
+
 ```php
 Nodeid is required
 ---------------------
@@ -279,6 +290,7 @@ $resetdebit = $user->reset_debit($nodeid);
 ```
 
 #### Create ACH-US with Logins
+
 ```php
 
 Body is required, and idempotency key is optional. Idempotency key is set to null by default
@@ -299,6 +311,7 @@ $achusnodelogins = $user->create_node($body, $idempotency_key);
 ```
 
 #### Create ACH-US with MFA
+
 ```php
 
 Body is required, and idempotency key is optional. Idempotency key is set to null by default
@@ -314,6 +327,7 @@ $achusnodemfa = $user->submit_mfa($body, $idempotency_key);
 ```
 
 #### Create ACH-US with AC/RT
+
 ```php
 
 Body is required, and idempotency key is optional. Idempotency key is set to null by default
@@ -336,6 +350,7 @@ $achusnode = $user->create_node($body, $idempotency_key);
 ```
 
 #### Verify Micro Deposit with AC/RT
+
 ```php
 Nodeid and body are both required, and idempotency key is optional. Idempotency key is set to null by default
 --------------------------------------------------------------------------------------------------------------
@@ -348,6 +363,7 @@ $verifymicro = $user->verify_micro($nodeid, $body);
 ```
 
 #### Reinitiate Micro Deposits
+
 ```php
 Nodeid is required.
 ---------------------
@@ -356,7 +372,8 @@ $nodeid = 'your_node_id';
 $reinit = $user->reinit_micro($nodeid);
 ```
 
-####  Get Node
+#### Get Node
+
 ```php
 Nodeid is required, full dehydrate and force refresh are optional. Full dehydrate and force refresh are set to null as default
 ------------------------------------------------------------------------------------------------------------------------------
@@ -367,7 +384,8 @@ $force_refresh = null;
 $node = $user->get_node($nodeid, $full_dehydrate, $force_refresh);
 ```
 
-####  Update Node
+#### Update Node
+
 ```php
 Nodeid and body are required
 -----------------------------
@@ -380,7 +398,8 @@ $body = (object)[
 $updatednode = $user->update_node($nodeid, $body);
 ```
 
-####  Delete Node
+#### Delete Node
+
 ```php
 Nodeid is required
 -------------------
@@ -390,7 +409,8 @@ $nodeid = 'your_node_id';
 $deletenode = $user->delete_node($nodeid);
 ```
 
-####  Generate Apple Pay
+#### Generate Apple Pay
+
 ```php
 Nodeid and body are required
 -----------------------------
@@ -404,7 +424,8 @@ $nodeid = 'your_node_id';
 $applepay = $user->generate_apple_pay($nodeid, $body);
 ```
 
-####  Get Subnets
+#### Get Subnets
+
 ```php
 Nodeid is required, page and per page are optional. Page and per page are set to null as default
 -------------------------------------------------------------------------------------------------
@@ -416,7 +437,8 @@ $per_page=null;
 $subnets = $user->get_subnets($nodeid, $page, $per_page);
 ```
 
-####  Get Subnet
+#### Get Subnet
+
 ```php
 Nodeid and subnetid are required
 ---------------------------------
@@ -427,8 +449,8 @@ $subnetid = 'your_subnet_id';
 $subnet = $user->get_subnet($nodeid, $subnetid);
 ```
 
+#### Create Subnet
 
-####  Create Subnet
 ```php
 Nodeid and body are required, idempotency key is optional. Idempotency key is set to null by default.
 -----------------------------------------------------------------------------------------------------
@@ -443,6 +465,7 @@ $newsubnet = $user->create_subnet($nodeid, $body, $idempotency_key);
 ```
 
 #### Get All Platform/Client Transactions
+
 ```php
 No arguments are required. Set $page and $per_page as null to exclude it.
 ------------------------------------------------------------------------
@@ -450,6 +473,7 @@ $allplatformtrans = $client->get_all_platform_transactions();
 ```
 
 #### Get All User Transactions
+
 ```php
 No arguments are required. $page and $per_page are set to null by default.
 ---------------
@@ -462,6 +486,7 @@ $allusertrans = $user->get_all_transactions( $page, $per_page );
 ```
 
 #### Get All Node Transactions
+
 ```php
 Nodeid is required. $page and $per_page are set to null by default.
 --------------------------------------------------------------------
@@ -475,6 +500,7 @@ $allnodetrans = $user->get_all_node_trans($nodeid, $page, $per_page );
 ```
 
 #### Create Transaction
+
 ```php
 Nodeid and body is required. Idempotency key is set to null by default.
 ------------------------------------------------------------------------
@@ -502,8 +528,8 @@ $idempotency_key = 'your_idempotency_key';
 $trans = $user->create_trans($nodeid, $body, $idempotency_key);
 ```
 
-
 #### Get a User Transaction
+
 ```php
 Nodeid and transid are required.
 --------------------------------
@@ -516,6 +542,7 @@ $usertrans = $user->get_trans( $nodeid, $transid );
 ```
 
 #### Comment on Status/Transaction
+
 ```php
 Nodeid, transid and body are required
 ----------------------------------------
@@ -529,7 +556,9 @@ $body = (object)[
 ];
 $comment = $user->comment_trans( $nodeid, $transid, $body );
 ```
+
 #### Delete Transaction
+
 ```php
 Nodeid and transid are required
 --------------------------------
@@ -541,8 +570,8 @@ $transid = 'your_trans_id';
 $usertrans = $user->delete_transaction($nodeid, $transid);
 ```
 
-
 #### Dispute Transaction
+
 ```php
 Nodeid, transid and body are required
 --------------------------------------
@@ -557,8 +586,8 @@ $body = (object)[
 $comment = $user->comment_trans( $nodeid, $transid, $body );
 ```
 
-
 ##### Retrieve Institutions
+
 ```php
 No arguments required
 ---------------------
@@ -567,6 +596,7 @@ $allInstitutions = $client->get_all_institutions();
 ```
 
 ##### Retrieve All Subscriptions
+
 ```php
 Page and per page are optional. Both are set to null by default
 ---------------------------------------------------------------
@@ -575,8 +605,8 @@ $per_page = 1;
 $allsubs = $client->get_all_subscriptions($page, $per_page);
 ```
 
-
 ##### Retrieve a Subscription
+
 ```php
 Subscriptionid is required.
 ----------------------------
@@ -586,6 +616,7 @@ Subscriptionid is required.
 ```
 
 ##### Create Subscription
+
 ```php
 Body is required, idempotency key is optional. Idempotency key is set to null by default.
 ------------------------------------------------------------------------------------------
@@ -608,7 +639,8 @@ Body is required, idempotency key is optional. Idempotency key is set to null by
 ```
 
 ##### Update Subscription
-```php  
+
+```php
 Body and subscriptionid are required.
 -------------------------------------
   $body= (object) [
@@ -623,7 +655,8 @@ Body and subscriptionid are required.
 ```
 
 ##### Get Statement by User
-```php  
+
+```php
 Page and per page are optional. Both are set to null by default.
 ----------------------------------------------------------------
  $user = $client->get_user('your_user_id');
@@ -634,7 +667,8 @@ Page and per page are optional. Both are set to null by default.
 ```
 
 ##### Get Node Statements
-```php  
+
+```php
 Page and per page are optional. Both are set to null by default.
 ----------------------------------------------------------------
  $user = $client->get_user('your_user_id');
@@ -646,7 +680,8 @@ Page and per page are optional. Both are set to null by default.
 ```
 
 ##### Get Public Key
-```php  
+
+```php
 Scope is optional. Scope is set to null by default.
 ---------------------------------------------------
  $scope = 'OAUTH|POST,USERS|POST,USERS|GET,USER|GET,USER|PATCH,SUBSCRIPTIONS|GET,SUBSCRIPTIONS|POST,SUBSCRIPTION|GET,SUBSCRIPTION|PATCH,CLIENT|REPORTS,CLIENT|CONTROLS';
@@ -655,7 +690,8 @@ Scope is optional. Scope is set to null by default.
 ```
 
 ##### Get Local ATM's
-```php  
+
+```php
 All arguments are optional and set to null by default.
 -----------------------------------------------------
 
@@ -670,7 +706,8 @@ All arguments are optional and set to null by default.
 ```
 
 ##### Get Crypto Quotes
-```php  
+
+```php
 No arguments
 -------------
 
@@ -678,7 +715,8 @@ $quotes = $client->get_crypto_quotes();
 ```
 
 ##### Get Crypto Market Data
-```php  
+
+```php
 Limit and currency are required
 --------------------------------
 $limit = 5;
